@@ -2,24 +2,37 @@
 #include <string.h>
 
 int main() {
-    int id, stock, cantidad, opcion;
+    int  stock, cantidad, opcion;
     float precio, total_ganancias = 0;
     char nombre[30];
+    char id[30];
 
-    // Registro del producto
     printf("Ingrese el ID del producto: \n");
-    scanf("%d", &id);
+    fgets(id, 30, stdin);
+    id[strcspn(id, "\n")] = '\0';
 
-    getchar();
-    
     printf("Ingrese el nombre del producto: \n");
     fgets(nombre, 30, stdin);
-    
-    printf("Ingrese la cantidad inicial en stock: \n");
-    scanf("%d", &stock);
-    
+    nombre[strcspn(nombre, "\n")] = '\0';
+   
+    do {
+        printf("Ingrese la cantidad inicial en stock (entero positivo): \n");
+        scanf("%d", &stock);
+        if(stock<=0){
+            printf("Error: Ingrese un número entero positivo.\n")
+        }
+
+    } while (stock <= 0);
+
+   do{
+
     printf("Ingrese el precio unitario del producto: \n");
     scanf("%f", &precio);
+    if(precio<=0){
+        printf ("\nIngresar el precio unitario positivo: \n");
+        while (getchar() != '\n'); 
+    }
+   }while(precio<0);
 
     do {
         printf("\nMenu de Opciones:\n");
@@ -65,8 +78,8 @@ int main() {
 
             case 3:
                 printf("\nInformacion del producto:\n");
-                printf("ID: %d\n", id);
-                printf("Nombre: %s", nombre);
+                printf("ID: %s\n", id);
+                printf("Nombre: %s\n", nombre);
                 printf("Stock disponible: %d\n", stock);
                 printf("Precio unitario: %.2f\n", precio);
                 break;
